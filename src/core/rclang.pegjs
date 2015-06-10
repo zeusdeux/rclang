@@ -62,7 +62,8 @@ WhitespaceOrNewLine "WhitespaceOrNewLine"
   / NewLine
 
 Argument
-  = Atom
+  = InvocationExpression
+  / Atom
   / "(" Whitespace* !AssignmentExpression expr:Expression Whitespace* ")" { return expr }
 
 Arguments "Arguments"
@@ -76,6 +77,7 @@ Block "Block"
 
 RHS "RHS"
   = block:Block { return block }
+  / opExpr:OperatorExpression { return opExpr }
   / invExpr:InvocationExpression { return invExpr }
   / atom:Atom { return atom }
 
@@ -109,8 +111,11 @@ UnaryLogicalOp "UnaryLogicalOp"
   = "!"
 
 OperatorExpression "OperatorExpression"
-  = arg1:Argument Whitespace* binaryOp:BinaryOperator Whitespace* arg2:Argument { return node("OperatorExpression", [arg1, binaryOp, arg2]) }
-  / unaryLogicalOp:UnaryLogicalOp expr:(Atom / Expression) { return node("UnaryLogicalOperation", expr) }
+  = arg1:Argument Whitespace* restOpExpr:RestOfBinaryOperatorExpression+ { return node("OperatorExpression", [arg1].concat(restOpExpr[0])) }
+  / unaryLogicalOp:UnaryLogicalOp expr:Argument Whitespace* rest:RestOfBinaryOperatorExpression* { return node("UnaryLogicalOperation", [unaryLogicalOp, expr].concat(rest)) }
+
+RestOfBinaryOperatorExpression "RestOfBinaryOperatorExpression"
+  = binaryOp:BinaryOperator Whitespace* arg2:Expression { return [binaryOp, arg2] }
 
 IfElseExpression "IfElseExpression"
   = "if" Whitespace* "(" Whitespace* opExpr:(OperatorExpression / Atom)  Whitespace* ")" Whitespace*
