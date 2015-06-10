@@ -1,0 +1,35 @@
+{
+  "name": "rclang",
+  "version": "1.0.0",
+  "description": "An interpreted language built during the \"Build an interpreted language\" sessions @recursecenter",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zeusdeux/rclang.git"
+  },
+  "keywords": [
+    "recurse",
+    "center",
+    "rc",
+    "rclang",
+    "interpreted",
+    "programming",
+    "language",
+    "pl",
+    "pegjs"
+  ],
+  "author": "Mudit Ameta",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zeusdeux/rclang/issues"
+  },
+  "homepage": "https://github.com/zeusdeux/rclang#readme",
+  "dependencies": {
+    "debug": "^2.2.0",
+    "minimist": "^1.1.1",
+    "pegjs": "^0.8.0"
+  }
+}
