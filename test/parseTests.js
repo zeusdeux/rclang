@@ -7,6 +7,7 @@ let d         = require('../src/util').logger('parseTests');
 let inputs    = [
   '',
   '12\n',
+  '1.2;',
   '123.21381720\n',
   '-10;',
   '-1231\n',
@@ -46,6 +47,7 @@ let inputs    = [
   'print (fib 10);',
   'print (fib 10) 10 b c;',
   '\n if (true) { 1; } else { 2; };',
+  '\n if (true) { 1; };',
   '\nif (a < 2) {\n\tdosomething a\n} else {\n\tlet t = 10\n\tdosomeotherthing t\n}\n',
   'a + b;',
   '1+2\n',
